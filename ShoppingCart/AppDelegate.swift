@@ -99,13 +99,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func updateCartTabBadge()
     {
-//        int total = [Cart totalProducts];
-//        UITabBarItem *cartTab = [self.tabBarController.tabBar.items objectAtIndex:1];
-//        
-//        if(total == 0)
-//        cartTab.badgeValue = nil;
-//        else
-//        cartTab.badgeValue = [NSString stringWithFormat:@"%d", total];
+        let total: Int = Cart.totalProducts()
+        let cartTab: UITabBarItem = self.tabBarController!.tabBar.items[1] as UITabBarItem
+        
+        if total > 0
+        {
+            cartTab.badgeValue = "\(total)"
+        }
+        else
+        {
+            cartTab.badgeValue = nil
+        }
     }
 
 }

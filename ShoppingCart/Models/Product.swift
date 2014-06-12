@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Product : NSObject
+class Product
 {
     var id: CInt
     var name: String

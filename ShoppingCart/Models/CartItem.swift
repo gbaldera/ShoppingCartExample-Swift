@@ -8,7 +8,7 @@
 
 import Foundation
 
-class CartItem: NSObject
+class CartItem
 {
     var product: Product?
     var quantity: CInt = 1
