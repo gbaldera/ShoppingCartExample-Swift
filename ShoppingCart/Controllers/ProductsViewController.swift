@@ -50,64 +50,36 @@ class ProductsViewController: UITableViewController {
     override func tableView(tableView: UITableView?, cellForRowAtIndexPath indexPath: NSIndexPath?) -> UITableViewCell?
     {
         let cell = tableView!.dequeueReusableCellWithIdentifier("ProductCell") as ProductCell
-            let product: Product = self.products[indexPath!.row]
+        let product: Product = self.products[indexPath!.row]
 
-            // Configure the cell...
-            cell.productImage.image = UIImage(named: product.image)
-            cell.productImage.contentMode = UIViewContentMode.ScaleAspectFit
+        // Configure the cell...
+        cell.productImage.image = UIImage(named: product.image)
+        cell.productImage.contentMode = UIViewContentMode.ScaleAspectFit
+        cell.productTitle.text = product.name
+       
+        let formatter = NSNumberFormatter()
+        formatter.maximumFractionDigits = 2
+        formatter.roundingMode = NSNumberFormatterRoundingMode.RoundDown
+        let price = formatter.stringFromNumber(NSNumber.numberWithDouble(product.price))
+        cell.productPrice.text = "$\(price)"
+        
+        cell.addToCartButton.addTarget(self, action: "addToCart:", forControlEvents: UIControlEvents.TouchUpInside)
 
         return cell
     }
     
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView?, canEditRowAtIndexPath indexPath: NSIndexPath?) -> Bool {
-    // Return NO if you do not want the specified item to be editable.
-    return true
-    }
-    */
-    
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView?, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath?) {
-    if editingStyle == .Delete {
-    // Delete the row from the data source
-    tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-    } else if editingStyle == .Insert {
-    // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }
-    }
-    */
-    
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView?, moveRowAtIndexPath fromIndexPath: NSIndexPath?, toIndexPath: NSIndexPath?) {
-    
-    }
-    */
-    
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView?, canMoveRowAtIndexPath indexPath: NSIndexPath?) -> Bool {
-    // Return NO if you do not want the item to be re-orderable.
-    return true
-    }
-    */
-    
-    /*
-    // #pragma mark - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue?, sender: AnyObject?) {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-    }
-    */
+    // #pragma mark - Utilities methods
     
     func loadProducts()
     {
         self.products = Product.listProducts()
         self.tableView.reloadData()
+    }
+
+    func addToCart(sender: UIButton!)
+    {
+        let alert = UIAlertView(title: "Prueba", message: "Hola klk", delegate: self, cancelButtonTitle: "Cancel")
+        alert.show()
     }
     
 }

@@ -11,6 +11,9 @@ import UIKit
 class ProductCell: UITableViewCell {
 
     @IBOutlet var productImage : UIImageView = nil
+    @IBOutlet var productTitle : UILabel = nil
+    @IBOutlet var productPrice : UILabel = nil
+    @IBOutlet var addToCartButton : BButton = nil
     
     init(style: UITableViewCellStyle, reuseIdentifier: String) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -20,6 +23,9 @@ class ProductCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        self.addToCartButton.setStyle(BButtonStyle.BootstrapV3)
+        self.addToCartButton.setType(BButtonType.Primary)
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

@@ -28,11 +28,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         let productsViewController = ProductsViewController(nibName: "ProductsViewController", bundle: nil)
         let productsNavViewController = UINavigationController(rootViewController: productsViewController)
-        let tabControllers = [productsNavViewController];
+        
+        let cartViewController = ProductsViewController(nibName: "ProductsViewController", bundle: nil)
+        let cartNavViewController = UINavigationController(rootViewController: cartViewController)
+        
+        let tabControllers = [productsNavViewController, cartNavViewController];
         
         self.tabBarController = UITabBarController()
         self.tabBarController!.setViewControllers(tabControllers, animated: false)
         self.tabBarController!.selectedIndex = 0
+        
+        self.setupTabBarItems() // setup tabBar
         
         self.window!.rootViewController = self.tabBarController
         self.window!.backgroundColor = UIColor.whiteColor()
@@ -96,6 +102,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     // #pragma mark - TabBar customization
+    
+    func setupTabBarItems()
+    {
+        let productsTab: UITabBarItem = self.tabBarController!.tabBar.items[0] as UITabBarItem
+        let cartTab: UITabBarItem = self.tabBarController!.tabBar.items[1] as UITabBarItem
+        
+        productsTab.title = "Products"
+        productsTab.tag = 1
+        productsTab.image = UIImage(named:"filled_box.png")
+        
+        cartTab.title = "Cart"
+        cartTab.tag = 2
+        cartTab.image = UIImage(named:"shopping_cart_empty.png")
+        
+        self.updateCartTabBadge()
+    }
     
     func updateCartTabBadge()
     {
